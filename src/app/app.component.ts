@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,23 +8,24 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  newTask: string;
+  // newTask: string;
   taskList: Array<string> = [];
   doneList: Array<string> = [];
 
-  add() {
-    this.taskList.push(this.newTask);
-    this.newTask = '';
+  add(task: string){
+    this.taskList.push(task);
   }
 
-  remove(task: string, index: number) {
+
+  remove(task: string) {
     // e in filter mean each element
-    this.taskList = this.taskList.filter( (e, i) => e !== task || i !== index  );
+    // this.taskList = this.taskList.filter( (e, i) => e !== task || i !== index  );
+    this.taskList = this.taskList.filter( e => e !== task );
   }
 
-  done(task: string, index: number) {
+  done(task: string) {
     this.doneList.push(task);
-    this.remove(task, index);
+    this.remove(task);
   }
 
 
